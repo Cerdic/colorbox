@@ -4,6 +4,7 @@
 	http://www.jacklmoore.com/colorbox
 
 	+ minWidth&minHeight support
+	+ colorbox_class support
 */
 (function ($, document, window) {
 	var
@@ -127,6 +128,7 @@
 
 	// Abstracting the HTML and event identifiers for easy rebranding
 	colorbox = 'colorbox',
+	colorbox_class = 'box_mediabox box_modalbox',
 	prefix = 'cbox',
 	boxElement = prefix + 'Element',
 
@@ -476,7 +478,7 @@
 			$window = $(window);
 			$box = $tag(div).attr({
 				id: colorbox,
-				'class': $.support.opacity === false ? prefix + 'IE' : '', // class for optional IE8 & lower targeted CSS.
+				'class': ($.support.opacity === false ? prefix + 'IE ' : '')+colorbox_class, // class for optional IE8 & lower targeted CSS.
 				role: 'dialog',
 				tabindex: '-1'
 			}).hide();
