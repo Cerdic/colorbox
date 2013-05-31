@@ -550,6 +550,28 @@
 			
 			$this.each(function () {
 				$.data(this, colorbox, $.extend({}, $.data(this, colorbox) || defaults, options));
+				var eltclass = $(this).attr('class');
+				if (eltclass){
+					if (eltclass.indexOf("boxWidth-")!== -1){
+						var w = eltclass.match(/boxWidth-([^\s'">]*)/);
+						w = w[1].replace(/pc/, '%'); // % not allowed in html attribute ; use 100pc instead of 100%
+						$.data(this, colorbox, $.extend($.data(this, colorbox), {width: w}));
+					}
+					if (eltclass.indexOf("boxHeight-")!== -1){
+						var h = eltclass.match(/boxHeight-([^\s'">]*)/);
+						h = h[1].replace(/pc/, '%'); // % not allowed in html attribute ; use 100pc instead of 100%
+						$.data(this, colorbox, $.extend($.data(this, colorbox), {height: h}));
+					}
+					if (eltclass.indexOf("boxIframe")!== -1){
+						$.data(this, colorbox, $.extend($.data(this, colorbox), {iframe: true}));
+					}
+					if (eltclass.indexOf("boxInline")!== -1) {
+						$.data(this, colorbox, $.extend($.data(this, colorbox),{inline:true}));
+					}
+					if (eltclass.indexOf("boxSlideshow_off")!== -1){
+						$.data(this, colorbox, $.extend($.data(this, colorbox), {slideshow: false}));
+					}
+				}
 			}).addClass(boxElement);
 			
 			if (($.isFunction(options.open) && options.open.call($this)) || options.open) {
